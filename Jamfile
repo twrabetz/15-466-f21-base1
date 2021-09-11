@@ -130,3 +130,8 @@ Objects $(GAME_NAMES:S=.cpp) ;
 
 LOCATE_TARGET = dist ; #put main in 'dist' directory
 MainFromObjects game : $(GAME_NAMES:S=$(SUFOBJ)) ;
+
+
+Objects PNGToBinary.cpp ;
+LOCATE_TARGET = pipeline ; #optional
+MainFromObjects PNGToBinary : PNGToBinary$(SUFOBJ) load_save_png$(SUFOBJ) data_path$(SUFOBJ) ;
