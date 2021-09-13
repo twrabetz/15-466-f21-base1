@@ -6,6 +6,37 @@
 #include <vector>
 #include <deque>
 
+struct Fan
+{
+	glm::vec2 position;
+	glm::vec2 direction;
+	float timeSinceChange = 0;
+	float changeTime;
+
+	int team = 0;
+
+	float currentTeamTime = 0.0f;
+
+	Fan(float newX, float newY)
+	{
+		position = glm::vec2(newX, newY);
+		changeTime = 0.5f + 1.0f * ((float)rand() / RAND_MAX);
+		direction = glm::vec2(((float)rand() / RAND_MAX) < 0.5f ? 1 : -1, ((float)rand() / RAND_MAX) < 0.5f ? 1 : -1);
+	}
+};
+
+struct Wall
+{
+	int x;
+	int y;
+
+	Wall(int newX, int newY)
+	{
+		x = newX;
+		y = newY;
+	}
+};
+
 struct PlayMode : Mode {
 	PlayMode();
 	virtual ~PlayMode();
@@ -23,11 +54,21 @@ struct PlayMode : Mode {
 		uint8_t pressed = 0;
 	} left, right, down, up;
 
-	//some weird background animation:
-	float background_fade = 0.0f;
-
 	//player position:
 	glm::vec2 player_at = glm::vec2(0.0f);
+
+	//the fanz
+	std::vector<Fan> fans;
+	const int numFans = 63;
+	const float fanSpeed = 30.0f;
+	const float standardTeamTime = 2.0f;
+
+	std::vector<Wall> walls;
+	int numWalls = 35;
+
+	//collision stuff
+	std::vector<glm::vec2> fanCollisionOffsets;
+	glm::vec2 playerCollisionOffset;
 
 	//----- drawing handled by PPU466 -----
 

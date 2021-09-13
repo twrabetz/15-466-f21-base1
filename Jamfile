@@ -117,6 +117,7 @@ GAME_NAMES =
 	PlayMode
 	PPU466
 	main
+	LoadBinary
 	load_save_png
 	gl_compile_program
 	Load

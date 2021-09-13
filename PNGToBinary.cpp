@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
 			uint8_t line = 0;
 			for (int i = j; i < j + 8; ++i)
 			{
+				std::cout << i << std::endl;
 				int bit = 0;
 				if (data[i][0] == 0 && data[i][1] == 0 && data[i][2] == 0)
 					bit = 1;
@@ -41,6 +42,7 @@ int main(int argc, char** argv) {
 			lines.push_back(line);
 		}
 		write_chunk<uint8_t>("SPRT", lines, &out);
+		out.close();
 	}
 	
 	std::cout << "Returning 0";
